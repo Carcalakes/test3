@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Exchange</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #d7e7c9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .stock-exchange {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #e5f0d7;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      color: #44803f;
+    }
+
+    .cash-display {
+      font-size: 16px;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+    }
+
+    thead th {
+      background-color: #82b282;
+      color: white;
+      padding: 10px;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tbody .positive {
+      color: green;
+    }
+
+    tbody .negative {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="stock-exchange">
+    <header class="header">
+      <h1>Bawsaq</h1>
+      <div class="cash-display">My Cash: $<span id="cash">3085</span></div>
+    </header>
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Current Price</th>
+          <th>Price Movement</th>
+          <th>% Change</th>
+        </tr>
+      </thead>
+      <tbody id="stock-table">
+        <!-- Rows will be added dynamically -->
+      </tbody>
+    </table>
+  </div>
+<script>
+    // Sample stock data
+    const stockData = [
+      { name: "Ammunation", price: 998.22, movement: -0.01, change: 0 },
+      { name: "Badger", price: 6.15, movement: 0.52, change: 8.44 },
+      { name: "BettaPharmaceuticals", price: 792.64, movement: 0, change: 0 },
+      { name: "BF", price: 599.61, movement: -0.51, change: -0.08 },
+      { name: "Binco", price: 1079.17, movement: -0.67, change: -0.06 },
+      { name: "Bleeter", price: 999.59, movement: -0.09, change: 0 },
+    ];
+
+    // Add stock data to the table
+    function loadStocks() {
+      const tableBody = document.getElementById("stock-table");
+      stockData.forEach((stock) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = 
+          <td>${stock.name}</td>
+          <td>${stock.price.toFixed(2)}</td>
+          <td class="${stock.movement >= 0 ? 'positive' : 'negative'}">
+            ${stock.movement.toFixed(2)}
+          </td>
+          <td class="${stock.change >= 0 ? 'positive' : 'negative'}">
+            ${stock.change.toFixed(2)}%
+          </td>
+        ;
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Initialize the stock table
+    loadStocks();
+  </script>
+</body>
+</html>
